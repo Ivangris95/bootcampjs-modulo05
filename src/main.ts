@@ -139,31 +139,44 @@ const queHabriaPasado = () => {
   }
 };
 
-const mensajePlantarse = () => {
+const calcularMensaje = (puntuacion: number): string => {
+  if (puntuacion < 4) {
+    return "Has sido muy conservador 🐔";
+  } else if (puntuacion === 5) {
+    return "Te ha entrado el cangelo 😰";
+  } else if (puntuacion === 7.5) {
+    return "¡¡ Lo has clavado !! Enhorabuenea 🎖️ ";
+  } else {
+    return "Casi, casi 👍";
+  }
+};
+
+const actualizarPlantarseDOM = (
+  boton: HTMLButtonElement,
+  mensaje: HTMLDivElement,
+  nuevoMensaje: string
+) => {
+  boton.disabled = true;
+  mensaje.innerHTML = nuevoMensaje;
+};
+const mensajePlantarase = () => {
   const elementoCarta = document.getElementById("dameCarta");
+  const elementoMensaje = document.getElementById("mensaje");
 
-  if (elementoCarta && elementoCarta instanceof HTMLButtonElement) {
-    elementoCarta.disabled = true;
-
-    if (partida.puntuacion < 4) {
-      partida.mensaje = "Has sido muy conservador 🐔";
-    } else if (partida.puntuacion === 5) {
-      partida.mensaje = "Te ha entrado el cangelo 😰";
-    } else if (partida.puntuacion === 7.5) {
-      partida.mensaje = "¡¡ Lo has clavado !! Enhorabuenea 🎖️ ";
-    } else {
-      partida.mensaje = "Casi, casi 👍";
-    }
-    const elementoMensaje = document.getElementById("mensaje");
-    if (elementoMensaje) {
-      elementoMensaje.innerHTML = partida.mensaje;
-    }
+  if (
+    elementoCarta &&
+    elementoCarta instanceof HTMLButtonElement &&
+    elementoMensaje &&
+    elementoMensaje instanceof HTMLDivElement
+  ) {
+    const nuevoMensaje = calcularMensaje(partida.puntuacion);
+    actualizarPlantarseDOM(elementoCarta, elementoMensaje, nuevoMensaje);
   }
 };
 
 const handlePlantarseClick = () => {
   queHabriaPasado();
-  mensajePlantarse();
+  mensajePlantarase();
   nuevaPartida();
 };
 
