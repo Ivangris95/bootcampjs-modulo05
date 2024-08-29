@@ -139,7 +139,7 @@ const queHabriaPasado = () => {
   }
 };
 
-const handlePlantarseClick = () => {
+const mensajePlantarse = () => {
   const elementoCarta = document.getElementById("dameCarta");
 
   if (elementoCarta && elementoCarta instanceof HTMLButtonElement) {
@@ -154,15 +154,17 @@ const handlePlantarseClick = () => {
     } else {
       partida.mensaje = "Casi, casi 👍";
     }
-
     const elementoMensaje = document.getElementById("mensaje");
     if (elementoMensaje) {
       elementoMensaje.innerHTML = partida.mensaje;
     }
-
-    queHabriaPasado();
-    nuevaPartida();
   }
+};
+
+const handlePlantarseClick = () => {
+  queHabriaPasado();
+  mensajePlantarse();
+  nuevaPartida();
 };
 
 const manejarCartaNueva = (): number => {
