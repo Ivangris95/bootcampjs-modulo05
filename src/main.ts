@@ -94,7 +94,7 @@ const nuevaPartida = () => {
   }
 };
 
-const gameOver = () => {
+const disabledBotton = () => {
   const elementoCarta = document.getElementById("dameCarta");
   const elementoPlantarse = document.getElementById("plantarse");
   if (
@@ -112,20 +112,24 @@ const gameOver = () => {
   nuevaPartida();
 };
 
-const gestionarPartida = () => {
-  if (partida.puntuacion === 7.5) {
-    partida.mensaje = "¡¡ Lo has clavado !! Enhorabuenea 🎖️ ";
-    gameOver();
-  }
-
-  if (partida.puntuacion > 7.5) {
-    partida.mensaje = "GAME OVER 💀. Intentalo otra vez.";
-    gameOver();
-  }
+const mensaje = () => {
   const elementoMensaje = document.getElementById("mensaje");
   if (elementoMensaje && elementoMensaje instanceof HTMLDivElement) {
     elementoMensaje.innerHTML = partida.mensaje;
   }
+};
+
+const gestionarPartida = () => {
+  if (partida.puntuacion === 7.5) {
+    partida.mensaje = "¡¡ Lo has clavado !! Enhorabuenea 🎖️ ";
+    disabledBotton();
+  }
+
+  if (partida.puntuacion > 7.5) {
+    partida.mensaje = "GAME OVER 💀. Intentalo otra vez.";
+    disabledBotton();
+  }
+  mensaje();
 };
 
 const queHabriaPasado = () => {
